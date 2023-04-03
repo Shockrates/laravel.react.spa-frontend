@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
 import axios from '../axios';
+import reactLogo from '../assets/react.svg'
+import { useAuth } from '../contexts/AuthContext'
+import { Link } from 'react-router-dom';
 
 export default function Register() {
 
   const { setUser }= useAuth();
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [password, setPasswordError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   // register user
   const handleSubmit = async (e) => {
@@ -21,7 +24,8 @@ export default function Register() {
 
     try {
       const resp =  await axios.post('/register', body);
-      if (resp.status === 200) {
+	  console.log(resp.status);
+      if (resp?.status === 200) {
         setUser(resp.data.user)
         return <Navigate to="/profile" />;
       }
@@ -48,13 +52,13 @@ export default function Register() {
   };
 
   return (
-    <sectiion className="bg-gray-50 dark:bg-gray-900">
+    <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <a href="https://reactjs.org" target="_blank" className="flex items-center">
-          <img src={reactLogo} className="h-6 mr-3 sm:h-9" alt="React logo" />
-          <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-							Laravel + React 
-					</span>
+      <a href="#" target="_blank" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+          <img src={reactLogo} className="w-8 h-8 mr-2" alt="React logo" />
+          	<span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+					Laravel + React - Register
+			</span>
         </a>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -97,7 +101,7 @@ export default function Register() {
 									name="email"
 									id="email"
 									className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-									placeholder="name@company.com"
+									placeholder="name@provider.com"
 									required
 								/>
 								{emailError && (
@@ -157,6 +161,6 @@ export default function Register() {
         </div>
 
       </div>
-    </sectiion>
+    </section>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import reactLogo from './assets/react.svg'
+import reactLogo from '../assets/react.svg'
 import { Navigate, Outlet } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext'
