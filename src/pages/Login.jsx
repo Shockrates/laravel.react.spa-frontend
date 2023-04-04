@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 import React, { useState } from 'react'
 import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext'
@@ -21,8 +21,9 @@ export default function Login() {
     try {
       const resp = await axios.post('/login', body);
       if (resp.status === 200) {
-        setUser(resp.data.user);
-        return <Navigate to='/profile' />
+        //console.log(resp.data.data.user);
+        setUser(resp.data.data.user);
+        return <Navigate to='/profile' replace={true}/>
 ;      }
     } catch (error) {
       if (error.response.status === 401) {
