@@ -15,7 +15,7 @@ export default function ProtectedLayout() {
       try {
         const resp = await axios.get('/user');
         if (resp.status === 200) {
-          setUser(resp.data.data);
+          setUser(resp.data.data.user);
         } 
       } catch (error) {
         if (error.response.status === 401) {
@@ -34,7 +34,7 @@ export default function ProtectedLayout() {
   // Logout the user
   const handleLogout = async () => {
     try {
-      const resp = await axios.get('/logout');
+      const resp = await axios.post('/logout');
       if (resp.status === 200) {
         localStorage.removeItem('user');
         window.location.href = '/';

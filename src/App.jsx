@@ -18,6 +18,8 @@ const axios = Axios.create({
     withCredentials: true,
     headers: {
         'X-Requested-With': 'XMLHttpRequest',
+        "Content-Type": "application/json",
+        "Accept": "application/json",
     },
 });
 
@@ -28,6 +30,11 @@ const axios = Axios.create({
   async function getToken() {
     // const csrf = await axios.get('/sanctum/csrf-cookie');
     // console.log('csrf = ', csrf);
+    
+
+    // axios.get("/api/user")
+    //     .then(response => console.log(response));
+
   }
   
   return (

@@ -2,10 +2,11 @@ import React, {useState} from 'react'
 import axios from '../axios';
 import reactLogo from '../assets/react.svg'
 import { useAuth } from '../contexts/AuthContext'
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 export default function Register() {
 
+	const navigate = useNavigate();
   const { setUser }= useAuth();
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -26,8 +27,9 @@ export default function Register() {
       const resp =  await axios.post('/register', body);
 	  
       if (resp?.status === 200) {
-        setUser(resp.data.user)
-        return <Navigate to="/profile" />;
+        setUser(resp.data.data.user)
+		navigate("/profile");
+        //return <Navigate to="/profile" />;
       }
     } catch (error) {
       if (error.response.status === 422) {

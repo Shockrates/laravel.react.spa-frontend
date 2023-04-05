@@ -1,11 +1,11 @@
 import axios from '../axios';
 import React, { useState } from 'react'
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext'
 import reactLogo from '../assets/react.svg'
 
 export default function Login() {
-
+  const navigate = useNavigate();
   const { setUser, csrfToken } = useAuth();
   const [error, setError] = useState(null);
 
@@ -21,9 +21,10 @@ export default function Login() {
     try {
       const resp = await axios.post('/login', body);
       if (resp.status === 200) {
-        //console.log(resp.data.data.user);
+        console.log(resp.data);
         setUser(resp.data.data.user);
-        return <Navigate to='/profile' replace={true}/>
+        navigate("/profile");
+        //return <Navigate to='/profile' replace={true}/>
 ;      }
     } catch (error) {
       if (error.response.status === 401) {

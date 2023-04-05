@@ -1,4 +1,4 @@
-import axios from "../axios";
+import Axios from "axios";
 import { createContext, useContext, useState } from "react"
 
 
@@ -27,7 +27,17 @@ export const AuthProvider = ( { children } ) => {
 
     // csrf token generation for guest methods
     const csrfToken = async() => {
-        await axios.get('http://localhost:8000/sanctum/csrf-cookie');
+
+        const axios = Axios.create({
+            baseURL: "http://localhost:8000",
+            withCredentials: true,
+            credentials: "include",
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        });
+
+        await axios.get('/sanctum/csrf-cookie');
         
         return true
     }
