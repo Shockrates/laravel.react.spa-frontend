@@ -9,6 +9,8 @@ export default function ProtectedLayout() {
 
   const { user, setUser } = useAuth();
 
+ 
+
   // check if user is logged in or not from server
   useEffect(() => {
     (async () => {
