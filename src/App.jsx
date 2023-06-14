@@ -28,12 +28,14 @@ const axios = Axios.create({
   }, []);
 
   async function getToken() {
-    // const csrf = await axios.get('/sanctum/csrf-cookie');
-    // console.log('csrf = ', csrf);
+    const csrf = await axios.get('/sanctum/csrf-cookie');
+    console.log('csrf = ', csrf);
     
 
     // axios.get("/api/user")
     //     .then(response => console.log(response));
+
+    
 
   }
   
